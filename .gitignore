@@ -1,0 +1,7 @@
+*.model
+*.pickle
+.ipynb_checkpoints
+raw_data/
+processed_data/
+test_data/
+models/

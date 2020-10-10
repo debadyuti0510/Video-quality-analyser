@@ -2,33 +2,37 @@ import numpy as np
 import cv2
 import os
 
-if __name__ == "__main__":
-    path = input("Enter the path to the video: ")
-    target_folder = input("Enter the name of the new folder: ")
-    cap = cv2.VideoCapture(path)
-
-    try:
-        if not os.path.exists(target_folder):
-            os.makedirs(target_folder)
-    except OSError:
-        print("Error creating the target folder.")
-
-    frame_no = 0
-    i = int(input("Enter the starting index: "))
-    while(cap.isOpened()):
-        ret, frame = cap.read()
+def vid_to_pic(source_folder, target_folder):
+    i = 0
+    for video in os.listdir(source_folder):
+        cap = cv2.VideoCapture(os.path.join(source_folder, video))
+        frame_no = 0
         
-        if ret:
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            if frame_no % 10 == 0:
-                name = target_folder + '/img' + str(i) + '.jpg'
-                print('Extracting ' + name)
-                cv2.imwrite(name, gray)
-                i += 1 
-            frame_no += 1
+        while(cap.isOpened()):
+            ret, frame = cap.read()
             
-        else:
-            break
+            if ret:
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                if frame_no % 10 == 0:
+                    name = os.path.join(target_folder, "img" + str(i) + ".jpg")
+                    print('Extracting ' + name)
+                    cv2.imwrite(name, gray)
+                    i += 1 
+                frame_no += 1
+                
+            else:
+                break
 
-    cap.release()
-    cv2.destroyAllWindows()
+        cap.release()
+        cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    CATEGORIES = ["SD", "HD"]
+    current_path = os.getcwd()
+    hd_video_path = os.path.join(current_path, "raw_data", "HD")
+    sd_video_path = os.path.join(current_path, "raw_data", "SD")
+    hd_target_path = os.path.join(current_path, "processed_data", "HD")
+    sd_target_path = os.path.join(current_path, "processed_data", "SD")
+    vid_to_pic(sd_video_path, sd_target_path)
+    vid_to_pic(hd_video_path, hd_target_path)
+
