@@ -79,3 +79,4 @@ Place the video files to be tested in *test_data/* and then run
 Enter the name of the video file and the model will predict the perceived quality for the video file as it plays. 
 
 
+The sample training and testing data can be downloaded [here](https://drive.google.com/drive/folders/14iTpRFcQXJfnLlEQMqTwnF_w03yeM-6M?usp=sharing).
