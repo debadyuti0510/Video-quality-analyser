@@ -2,6 +2,12 @@ import numpy as np
 import cv2
 import os
 
+'''
+Iterates and reads all videos placed in source folder and extracts 
+every 10th frame as an image to the target folder. Takes source 
+folder and target folder paths as arguments.
+
+'''
 def vid_to_pic(source_folder, target_folder):
     i = 0
     for video in os.listdir(source_folder):
@@ -14,14 +20,14 @@ def vid_to_pic(source_folder, target_folder):
             if ret:
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 if frame_no % 10 == 0:
-                    name = os.path.join(target_folder, "img" + str(i) + ".jpg")
+                    name = os.path.join(target_folder, "img" + str(i) + ".jpg")  #Incrementally generates names for extracted images
                     print('Extracting ' + name)
                     cv2.imwrite(name, gray)
                     i += 1 
                 frame_no += 1
                 
             else:
-                break
+                break       #Breaks out if no more frames exist in the video
 
         cap.release()
         cv2.destroyAllWindows()
