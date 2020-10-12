@@ -35,11 +35,6 @@ The following packages need to be installed in the environment where this projec
         
         pip install opencv-python
 
-- #### Numpy
-        pip install numpy
-
-- #### Matplotlib
-        pip install matplotlib
 - #### Tensorflow
     
         conda install -c anaconda tensorflow (recommended with CPU)  
