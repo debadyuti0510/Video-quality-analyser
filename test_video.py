@@ -27,6 +27,7 @@ def play_and_test():
         if ret:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             new_array = cv2.resize(gray, (IMG_SIZE_R, IMG_SIZE_C))
+            new_array = new_array/255.0
             new_array = new_array.reshape(-1, IMG_SIZE_R, IMG_SIZE_C, 1)
 
             prediction = model.predict([new_array])
